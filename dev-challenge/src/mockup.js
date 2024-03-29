@@ -1,166 +1,229 @@
-export const mockup ={
-  "data": {
-    "characters": {
-      "results": [
+export const mockup = {
+  data: {
+    characters: {
+      info: {
+        next: 2
+      },
+      results: [
         {
-          "name": "Rick Sanchez",
-          "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-          "id": "1",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Male"
+          id: '1',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+          name: 'Rick Sanchez',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'Earth (C-137)'
+          }
         },
         {
-          "name": "Morty Smith",
-          "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-          "id": "2",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Male"
+          id: '2',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+          name: 'Morty Smith',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Summer Smith",
-          "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-          "id": "3",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Female"
+          id: '3',
+          gender: 'Female',
+          image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
+          name: 'Summer Smith',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'Earth (Replacement Dimension)'
+          }
         },
         {
-          "name": "Beth Smith",
-          "image": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
-          "id": "4",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Female"
+          id: '4',
+          gender: 'Female',
+          image: 'https://rickandmortyapi.com/api/character/avatar/4.jpeg',
+          name: 'Beth Smith',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'Earth (Replacement Dimension)'
+          }
         },
         {
-          "name": "Jerry Smith",
-          "image": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
-          "id": "5",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Male"
+          id: '5',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
+          name: 'Jerry Smith',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'Earth (Replacement Dimension)'
+          }
         },
         {
-          "name": "Abadango Cluster Princess",
-          "image": "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
-          "id": "6",
-          "status": "Alive",
-          "species": "Alien",
-          "gender": "Female"
+          id: '6',
+          gender: 'Female',
+          image: 'https://rickandmortyapi.com/api/character/avatar/6.jpeg',
+          name: 'Abadango Cluster Princess',
+          status: 'Alive',
+          species: 'Alien',
+          origin: {
+            name: 'Abadango'
+          }
         },
         {
-          "name": "Abradolf Lincler",
-          "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
-          "id": "7",
-          "status": "unknown",
-          "species": "Human",
-          "gender": "Male"
+          id: '7',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/7.jpeg',
+          name: 'Abradolf Lincler',
+          status: 'unknown',
+          species: 'Human',
+          origin: {
+            name: 'Earth (Replacement Dimension)'
+          }
         },
         {
-          "name": "Adjudicator Rick",
-          "image": "https://rickandmortyapi.com/api/character/avatar/8.jpeg",
-          "id": "8",
-          "status": "Dead",
-          "species": "Human",
-          "gender": "Male"
+          id: '8',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/8.jpeg',
+          name: 'Adjudicator Rick',
+          status: 'Dead',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Agency Director",
-          "image": "https://rickandmortyapi.com/api/character/avatar/9.jpeg",
-          "id": "9",
-          "status": "Dead",
-          "species": "Human",
-          "gender": "Male"
+          id: '9',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/9.jpeg',
+          name: 'Agency Director',
+          status: 'Dead',
+          species: 'Human',
+          origin: {
+            name: 'Earth (Replacement Dimension)'
+          }
         },
         {
-          "name": "Alan Rails",
-          "image": "https://rickandmortyapi.com/api/character/avatar/10.jpeg",
-          "id": "10",
-          "status": "Dead",
-          "species": "Human",
-          "gender": "Male"
+          id: '10',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/10.jpeg',
+          name: 'Alan Rails',
+          status: 'Dead',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Albert Einstein",
-          "image": "https://rickandmortyapi.com/api/character/avatar/11.jpeg",
-          "id": "11",
-          "status": "Dead",
-          "species": "Human",
-          "gender": "Male"
+          id: '11',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
+          name: 'Albert Einstein',
+          status: 'Dead',
+          species: 'Human',
+          origin: {
+            name: 'Earth (C-137)'
+          }
         },
         {
-          "name": "Alexander",
-          "image": "https://rickandmortyapi.com/api/character/avatar/12.jpeg",
-          "id": "12",
-          "status": "Dead",
-          "species": "Human",
-          "gender": "Male"
+          id: '12',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/12.jpeg',
+          name: 'Alexander',
+          status: 'Dead',
+          species: 'Human',
+          origin: {
+            name: 'Earth (C-137)'
+          }
         },
         {
-          "name": "Alien Googah",
-          "image": "https://rickandmortyapi.com/api/character/avatar/13.jpeg",
-          "id": "13",
-          "status": "unknown",
-          "species": "Alien",
-          "gender": "unknown"
+          id: '13',
+          gender: 'unknown',
+          image: 'https://rickandmortyapi.com/api/character/avatar/13.jpeg',
+          name: 'Alien Googah',
+          status: 'unknown',
+          species: 'Alien',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Alien Morty",
-          "image": "https://rickandmortyapi.com/api/character/avatar/14.jpeg",
-          "id": "14",
-          "status": "unknown",
-          "species": "Alien",
-          "gender": "Male"
+          id: '14',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/14.jpeg',
+          name: 'Alien Morty',
+          status: 'unknown',
+          species: 'Alien',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Alien Rick",
-          "image": "https://rickandmortyapi.com/api/character/avatar/15.jpeg",
-          "id": "15",
-          "status": "unknown",
-          "species": "Alien",
-          "gender": "Male"
+          id: '15',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/15.jpeg',
+          name: 'Alien Rick',
+          status: 'unknown',
+          species: 'Alien',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Amish Cyborg",
-          "image": "https://rickandmortyapi.com/api/character/avatar/16.jpeg",
-          "id": "16",
-          "status": "Dead",
-          "species": "Alien",
-          "gender": "Male"
+          id: '16',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/16.jpeg',
+          name: 'Amish Cyborg',
+          status: 'Dead',
+          species: 'Alien',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Annie",
-          "image": "https://rickandmortyapi.com/api/character/avatar/17.jpeg",
-          "id": "17",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Female"
+          id: '17',
+          gender: 'Female',
+          image: 'https://rickandmortyapi.com/api/character/avatar/17.jpeg',
+          name: 'Annie',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'Earth (C-137)'
+          }
         },
         {
-          "name": "Antenna Morty",
-          "image": "https://rickandmortyapi.com/api/character/avatar/18.jpeg",
-          "id": "18",
-          "status": "Alive",
-          "species": "Human",
-          "gender": "Male"
+          id: '18',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/18.jpeg',
+          name: 'Antenna Morty',
+          status: 'Alive',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Antenna Rick",
-          "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
-          "id": "19",
-          "status": "unknown",
-          "species": "Human",
-          "gender": "Male"
+          id: '19',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/19.jpeg',
+          name: 'Antenna Rick',
+          status: 'unknown',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         },
         {
-          "name": "Ants in my Eyes Johnson",
-          "image": "https://rickandmortyapi.com/api/character/avatar/20.jpeg",
-          "id": "20",
-          "status": "unknown",
-          "species": "Human",
-          "gender": "Male"
+          id: '20',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/20.jpeg',
+          name: 'Ants in my Eyes Johnson',
+          status: 'unknown',
+          species: 'Human',
+          origin: {
+            name: 'unknown'
+          }
         }
       ]
     }

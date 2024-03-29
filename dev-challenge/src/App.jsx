@@ -19,6 +19,22 @@ function App () {
           type='text'
           placeholder='Ingresa el personaje que deseas buscar'
         />
+        <button>Buscar</button>
+        <div>
+          <select>
+            <option value='' disabled selected>Status...</option>
+          </select>
+
+          <select>
+            <option value='' disabled selected>Especie...</option>
+          </select>
+
+          <select>
+            <option value='' disabled selected>Genero</option>
+          </select>
+
+          <button> Reset filters</button>
+        </div>
       </form>
       <main>
         {characters.map((e) => {
