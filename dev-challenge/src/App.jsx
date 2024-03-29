@@ -1,23 +1,44 @@
+import { useState } from 'react'
 import './App.css'
 import { Card } from './components/Card'
 import { mockup } from './mockup'
+import { Modal } from './components/Modal'
 
-function App() {
+function App () {
+  const [selectedCharacter, setSelectedCharacter] = useState(null)
+  const [characters, setCharacters] = useState(mockup.data.characters.results)
 
+  const handleClick = (character) => {
+    setSelectedCharacter(character)
+    console.log(selectedCharacter)
+  }
   return (
     <>
-      <h1>My Project</h1>
+      <form>
+        <input
+          type='text'
+          placeholder='Ingresa el personaje que deseas buscar'
+        />
+      </form>
       <main>
-        {mockup.data.characters.results.map((e) =>{
-          return(
+        {characters.map((e) => {
+          return (
             <Card
-            id={e.id}
-            image={e.image}
-            key={e.id}
-            name={e.name} />
+              onClick={handleClick}
+              character={e}
+              key={e.id}
+            />
           )
         })}
       </main>
+
+      {
+        selectedCharacter &&
+          <Modal
+            closeModal={() => setSelectedCharacter(null)}
+            character={selectedCharacter}
+          />
+      }
     </>
   )
 }
