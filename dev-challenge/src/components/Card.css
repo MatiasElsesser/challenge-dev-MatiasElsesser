@@ -1,0 +1,32 @@
+.card-container {
+  width: 200px;
+  border-radius: 15%;
+  position: relative;
+  height: auto;
+}
+
+.card-container h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0,.2);
+}
+.card-container img {
+  width: 100%;
+  margin: 0;
+}
+
+.card-container span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+  margin: 5px 5px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0,.2);
+
+  font-weight: bold;
+}
