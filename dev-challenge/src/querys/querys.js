@@ -29,10 +29,10 @@ gql`
       results{
         id
         gender
-        image
-        name
         status
         species
+        image
+        name
         origin {
           name
         }
