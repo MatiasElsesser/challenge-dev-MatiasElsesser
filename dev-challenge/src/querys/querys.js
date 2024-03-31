@@ -1,12 +1,14 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_CHARACTERS =
-gql`
-  query allCharacters {
-      characters(page:1){
-          info{
-              next
-          }
+    gql`
+    query allCharacters($page: Int) {
+      characters(page: $page){
+        info{
+          next
+          prev
+          pages
+        }
         results{
           id
           gender
@@ -19,8 +21,7 @@ gql`
           }
         }
       }
-    }
-  `
+    } `
 
 export const SEARCH_CHARACTER =
 gql`

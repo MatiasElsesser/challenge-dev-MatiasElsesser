@@ -4,7 +4,7 @@ import { useLazyQuery } from '@apollo/client'
 import { SEARCH_CHARACTER } from '../querys/querys'
 import './Search.css'
 
-export const Search = () => {
+export const Search = ({ handleClick }) => {
   const [getCharacter, { data, error, loading }] = useLazyQuery(SEARCH_CHARACTER)
   const [results, setResults] = useState([])
   const [search, setSearch] = useState('')
@@ -42,6 +42,7 @@ export const Search = () => {
           results.map(item => {
             return (
               <Card
+                onClick={handleClick}
                 key={item.id}
                 character={item}
               />

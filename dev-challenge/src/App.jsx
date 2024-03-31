@@ -5,13 +5,26 @@ import { Modal } from './components/Modal'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
 import { Search } from './components/Search'
+import { Footer } from './components/Footer'
 
 function App () {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [characters, setCharacters] = useState([])
   const [filters, setFilters] = useState({ status: '', species: '', gender: '' })
+  const [offset, setOffset] = useState(1)
+  const { data, error, loading, fetchMore } = useQuery(GET_ALL_CHARACTERS, {
+    variables: { page: offset }
+  })
 
-  const { data, error, loading } = useQuery(GET_ALL_CHARACTERS)
+  const handlePages = (page) => {
+    fetchMore({
+      variables: { page },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        return fetchMoreResult
+      }
+    })
+    setOffset(page)
+  }
 
   const extractOptions = (key) => {
     const options = new Set(data.characters.results.map((character) => character[key]))
@@ -51,7 +64,9 @@ function App () {
 
   return (
     <>
-      <Search />
+      <Search
+        handleClick={handleClick}
+      />
       <h2>Personajes</h2>
       <div>
         <select name='status' defaultValue='' onChange={handleFilterChange}>
@@ -101,8 +116,14 @@ function App () {
               />
             )
           })
-}
+        }
       </main>
+
+      <Footer
+        data={data}
+        handlePages={handlePages}
+        offset={offset}
+      />
 
       {
         selectedCharacter &&
