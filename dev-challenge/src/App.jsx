@@ -5,26 +5,70 @@ import { Modal } from './components/Modal'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
 import { Search } from './components/Search'
-import { Footer } from './components/Footer'
+// import { Footer } from './components/Footer'
 
 function App () {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [characters, setCharacters] = useState([])
+  const [filteredCharacters, setFilteredCharacters] = useState([])
   const [filters, setFilters] = useState({ status: '', species: '', gender: '' })
   const [offset, setOffset] = useState(1)
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_CHARACTERS, {
     variables: { page: offset }
   })
+  const [isFetching, setIsFetching] = useState(false)
 
-  const handlePages = (page) => {
-    fetchMore({
-      variables: { page },
-      updateQuery: (prevResult, { fetchMoreResult }) => {
-        return fetchMoreResult
+  useEffect(() => {
+    if (data && data.characters.results) {
+      setCharacters(prev => [...prev, ...data.characters.results])
+    }
+  }, [data])
+
+  useEffect(() => {
+    // handle Scroll event
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight
+      ) return
+      setIsFetching(true)
+    }
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // fetching
+    if (!isFetching || loading || !data.characters.info.next) return
+
+    const loadNextPage = async () => {
+      try {
+        const newCharactersData = await fetchMore({
+          variables: { page: data.characters.info.next }
+        })
+
+        setCharacters((prevCharacters) => [
+          ...prevCharacters,
+          ...newCharactersData.data.characters.results
+        ])
+
+        setOffset(data.characters.info.next)
+        setIsFetching(false)
+      } catch (error) {
+        console.error('Error al cargar la siguiente página:', error)
       }
-    })
-    setOffset(page)
-  }
+    }
+
+    loadNextPage()
+  }, [isFetching, fetchMore, loading, data, filters])
+
+  useEffect(() => {
+    const filteredCharacters = characters.filter((character) =>
+      Object.entries(filters).every(([key, value]) => !value || character[key] === value)
+    )
+
+    setFilteredCharacters(filteredCharacters)
+  }, [characters, filters])
 
   const extractOptions = (key) => {
     const options = new Set(data.characters.results.map((character) => character[key]))
@@ -38,23 +82,11 @@ function App () {
 
   const resetFilters = () => {
     setFilters({ status: '', species: '', gender: '' })
-    // eslint-disable-next-line no-return-assign
-    document.querySelectorAll('select').forEach(sel => sel.value = '')
   }
-
-  const filteredCharacters = characters.filter((character) =>
-    Object.entries(filters).every(([key, value]) => !value || character[key] === value)
-  )
 
   const handleClick = (character) => {
     setSelectedCharacter(character)
   }
-
-  useEffect(() => {
-    if (data && data.characters.results) {
-      setCharacters(data.characters.results)
-    }
-  }, [data])
 
   if (error) {
     console.log(error)
@@ -68,7 +100,7 @@ function App () {
         handleClick={handleClick}
       />
       <h2>Personajes</h2>
-      <div>
+      <form>
         <select name='status' defaultValue='' onChange={handleFilterChange}>
           <option value='' disabled selected>Status...</option>
           {
@@ -102,8 +134,8 @@ function App () {
           }
         </select>
 
-        <button onClick={resetFilters}> Reset filters</button>
-      </div>
+        <button type='reset' onClick={resetFilters}> Reset filters</button>
+      </form>
 
       <main>
         {
@@ -119,11 +151,11 @@ function App () {
         }
       </main>
 
-      <Footer
+      {/* <Footer
         data={data}
         handlePages={handlePages}
         offset={offset}
-      />
+      /> */}
 
       {
         selectedCharacter &&

@@ -1,4 +1,15 @@
 export const Footer = ({ data, handlePages, offset }) => {
+  // En caso de paginar con botones de manera manual
+  // const handlePages = (page) => {
+  //   fetchMore({
+  //     variables: { page },
+  //     updateQuery: (prevResult, { fetchMoreResult }) => {
+  //       return fetchMoreResult
+  //     }
+  //   })
+  //   setOffset(page)
+  // }
+
   return (
     <footer>
       <button
