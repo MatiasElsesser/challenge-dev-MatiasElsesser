@@ -5,6 +5,7 @@ import { Modal } from './components/Modal'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
 import { Search } from './components/Search'
+import { ScrollTopBtn } from './components/ScrollTopBtn'
 // import { Footer } from './components/Footer'
 
 function App () {
@@ -13,29 +14,37 @@ function App () {
   const [filteredCharacters, setFilteredCharacters] = useState([])
   const [filters, setFilters] = useState({ status: '', species: '', gender: '' })
   const [offset, setOffset] = useState(1)
+  const [isFetching, setIsFetching] = useState(false)
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_CHARACTERS, {
     variables: { page: offset }
   })
-  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     if (data && data.characters.results) {
-      setCharacters(prev => [...prev, ...data.characters.results])
+      const newCharacters = data.characters.results.filter(
+        character => !characters.some(existingCharacter => existingCharacter.id === character.id)
+      )
+      setCharacters(prev => [...prev, ...newCharacters])
     }
   }, [data])
 
   useEffect(() => {
-    // handle Scroll event
+    //  Scroll event
     const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight
-      ) return
-      setIsFetching(true)
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement
+      const distanceToBottom = scrollHeight - (scrollTop + clientHeight)
+
+      const minDistanceToBottom = 100
+
+      if (distanceToBottom < minDistanceToBottom && !isFetching) {
+        setIsFetching(true)
+      }
     }
+
     window.addEventListener('scroll', handleScroll)
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isFetching])
 
   useEffect(() => {
     // fetching
@@ -47,20 +56,24 @@ function App () {
           variables: { page: data.characters.info.next }
         })
 
+        const newCharacters = newCharactersData.data.characters.results
+
         setCharacters((prevCharacters) => [
           ...prevCharacters,
-          ...newCharactersData.data.characters.results
+          ...newCharacters
         ])
 
         setOffset(data.characters.info.next)
         setIsFetching(false)
       } catch (error) {
         console.error('Error al cargar la siguiente página:', error)
+      } finally {
+        setIsFetching(false)
       }
     }
 
     loadNextPage()
-  }, [isFetching, fetchMore, loading, data, filters])
+  }, [isFetching, fetchMore, loading, data, characters])
 
   useEffect(() => {
     const filteredCharacters = characters.filter((character) =>
@@ -164,6 +177,7 @@ function App () {
             character={selectedCharacter}
           />
       }
+      <ScrollTopBtn />
     </>
   )
 }

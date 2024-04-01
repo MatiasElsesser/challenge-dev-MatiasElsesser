@@ -23,6 +23,7 @@ export const Search = ({ handleClick }) => {
   if (error) return <p>Ocurrio un error en la busqueda</p>
   return (
     <>
+      <h2>Busca tu personaje</h2>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
