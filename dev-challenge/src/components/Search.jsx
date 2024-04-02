@@ -3,6 +3,7 @@ import { Card } from './Card'
 import { useLazyQuery } from '@apollo/client'
 import { SEARCH_CHARACTER } from '../querys/querys'
 import './Search.css'
+import { SearchIcon } from '../icons/SearchIcon'
 
 export const Search = ({ handleClick }) => {
   const [getCharacter, { data, error, loading }] = useLazyQuery(SEARCH_CHARACTER)
@@ -16,7 +17,9 @@ export const Search = ({ handleClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    getCharacter({ variables: { name: search } })
+    if (search.length >= 1) {
+      getCharacter({ variables: { name: search } })
+    }
   }
 
   useEffect(() => {
@@ -42,7 +45,8 @@ export const Search = ({ handleClick }) => {
           <button
             type='submit'
             className='search-btn'
-          >Buscar
+          >
+            <SearchIcon />
           </button>
         </div>
 

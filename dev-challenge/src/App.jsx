@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
 import { Search } from './components/Search'
 import { ScrollTopBtn } from './components/ScrollTopBtn'
+import { Filters } from './components/Filters'
 // import { Footer } from './components/Footer'
 
 function App () {
@@ -83,20 +84,6 @@ function App () {
     setFilteredCharacters(filteredCharacters)
   }, [characters, filters])
 
-  const extractOptions = (key) => {
-    const options = new Set(data.characters.results.map((character) => character[key]))
-    return [...options]
-  }
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target
-    setFilters({ ...filters, [name]: value })
-  }
-
-  const resetFilters = () => {
-    setFilters({ status: '', species: '', gender: '' })
-  }
-
   const handleClick = (character) => {
     setSelectedCharacter(character)
   }
@@ -113,54 +100,12 @@ function App () {
         handleClick={handleClick}
       />
       <h2>Personajes</h2>
-      <form className='filters-form'>
 
-        <div className='select-container'>
-          <select name='status' defaultValue='' onChange={handleFilterChange}>
-            <option value='' disabled selected>Status...</option>
-            {
-            extractOptions('status').map((status) => {
-              return (
-                <option key={status} value={status}>{status}</option>
-              )
-            })
-          }
-          </select>
-        </div>
-
-        <div className='select-container'>
-          <select name='species' onChange={handleFilterChange} defaultValue=''>
-            <option value='' disabled selected>Especie...</option>
-            {
-            extractOptions('species').map((species) => {
-              return (
-                <option key={species} value={species}>{species}</option>
-              )
-            })
-          }
-          </select>
-        </div>
-
-        <div className='select-container'>
-          <select name='gender' onChange={handleFilterChange} defaultValue=''>
-            <option value='' disabled selected>Genero</option>
-            {
-            extractOptions('gender').map((gender) => {
-              return (
-                <option key={gender} value={gender}>{gender}</option>
-              )
-            })
-          }
-          </select>
-        </div>
-
-        <button
-          type='reset'
-          onClick={resetFilters}
-          className='reset-btn'
-        > Reset filters
-        </button>
-      </form>
+      <Filters
+        data={data}
+        filters={filters}
+        setFilters={setFilters}
+      />
 
       <main>
         {
@@ -175,12 +120,6 @@ function App () {
           })
         }
       </main>
-
-      {/* <Footer
-        data={data}
-        handlePages={handlePages}
-        offset={offset}
-      /> */}
 
       {
         selectedCharacter &&
