@@ -9,6 +9,11 @@ export const Search = ({ handleClick }) => {
   const [results, setResults] = useState([])
   const [search, setSearch] = useState('')
 
+  const handleReset = () => {
+    setResults([])
+    setSearch('')
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     getCharacter({ variables: { name: search } })
@@ -24,17 +29,31 @@ export const Search = ({ handleClick }) => {
   return (
     <>
       <h2>Busca tu personaje</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Ingresa el personaje que deseas buscar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type='submit'>Buscar</button>
+      <form
+        onSubmit={handleSubmit}
+      >
+        <div className='searchbar-container'>
+          <input
+            type='text'
+            placeholder='Ingresa el personaje que deseas buscar'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            type='submit'
+            className='search-btn'
+          >Buscar
+          </button>
+        </div>
+
+        <button
+          onClick={handleReset}
+          type='reset'
+        >Eliminar busqueda
+        </button>
       </form>
       {
-        data &&
+        results.length > 0 &&
           <h2>Resultados de tu busqueda</h2>
       }
       <section className='search-results'>

@@ -113,41 +113,53 @@ function App () {
         handleClick={handleClick}
       />
       <h2>Personajes</h2>
-      <form>
-        <select name='status' defaultValue='' onChange={handleFilterChange}>
-          <option value='' disabled selected>Status...</option>
-          {
+      <form className='filters-form'>
+
+        <div className='select-container'>
+          <select name='status' defaultValue='' onChange={handleFilterChange}>
+            <option value='' disabled selected>Status...</option>
+            {
             extractOptions('status').map((status) => {
               return (
                 <option key={status} value={status}>{status}</option>
               )
             })
           }
-        </select>
+          </select>
+        </div>
 
-        <select name='species' onChange={handleFilterChange} defaultValue=''>
-          <option value='' disabled selected>Especie...</option>
-          {
+        <div className='select-container'>
+          <select name='species' onChange={handleFilterChange} defaultValue=''>
+            <option value='' disabled selected>Especie...</option>
+            {
             extractOptions('species').map((species) => {
               return (
                 <option key={species} value={species}>{species}</option>
               )
             })
           }
-        </select>
+          </select>
+        </div>
 
-        <select name='gender' onChange={handleFilterChange} defaultValue=''>
-          <option value='' disabled selected>Genero</option>
-          {
+        <div className='select-container'>
+          <select name='gender' onChange={handleFilterChange} defaultValue=''>
+            <option value='' disabled selected>Genero</option>
+            {
             extractOptions('gender').map((gender) => {
               return (
                 <option key={gender} value={gender}>{gender}</option>
               )
             })
           }
-        </select>
+          </select>
+        </div>
 
-        <button type='reset' onClick={resetFilters}> Reset filters</button>
+        <button
+          type='reset'
+          onClick={resetFilters}
+          className='reset-btn'
+        > Reset filters
+        </button>
       </form>
 
       <main>
