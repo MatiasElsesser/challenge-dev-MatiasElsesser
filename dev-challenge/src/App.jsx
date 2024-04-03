@@ -7,18 +7,22 @@ import { GET_ALL_CHARACTERS } from './querys/querys'
 import { Search } from './components/Search'
 import { ScrollTopBtn } from './components/ScrollTopBtn'
 import { Filters } from './components/Filters'
-// import { Footer } from './components/Footer'
+import { useFilters } from './hooks/useFilters'
 
 function App () {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
-  const [characters, setCharacters] = useState([])
-  const [filteredCharacters, setFilteredCharacters] = useState([])
-  const [filters, setFilters] = useState({ status: '', species: '', gender: '' })
   const [offset, setOffset] = useState(1)
   const [isFetching, setIsFetching] = useState(false)
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_CHARACTERS, {
     variables: { page: offset }
   })
+  const {
+    filteredCharacters,
+    filters,
+    setCharacters,
+    setFilters,
+    characters
+  } = useFilters()
 
   useEffect(() => {
     if (data && data.characters.results) {
@@ -29,8 +33,8 @@ function App () {
     }
   }, [data])
 
+  //  Scroll event
   useEffect(() => {
-    //  Scroll event
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement
       const distanceToBottom = scrollHeight - (scrollTop + clientHeight)
@@ -47,8 +51,8 @@ function App () {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isFetching])
 
+  // fetching
   useEffect(() => {
-    // fetching
     if (!isFetching || loading || !data.characters.info.next) return
 
     const loadNextPage = async () => {
@@ -75,14 +79,6 @@ function App () {
 
     loadNextPage()
   }, [isFetching, fetchMore, loading, data, characters])
-
-  useEffect(() => {
-    const filteredCharacters = characters.filter((character) =>
-      Object.entries(filters).every(([key, value]) => !value || character[key] === value)
-    )
-
-    setFilteredCharacters(filteredCharacters)
-  }, [characters, filters])
 
   const handleClick = (character) => {
     setSelectedCharacter(character)

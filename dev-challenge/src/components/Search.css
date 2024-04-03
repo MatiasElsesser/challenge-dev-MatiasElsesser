@@ -12,6 +12,7 @@ form {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin: 15px 0 25px;
 }
 
 .searchbar-container {

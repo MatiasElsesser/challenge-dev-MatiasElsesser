@@ -4,6 +4,8 @@
   position: relative;
   border-radius: 15px;
   transition: all .3s;
+  animation: showCard 1s;
+
 }
 
 .card-container h3 {
@@ -35,11 +37,20 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin: 5px 5px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0,.2);
+  background-color: rgba(0, 0, 0,.4);
 
   font-weight: bold;
+  font-size: 1rem;
+}
+@keyframes showCard {
+  from {
+    opacity: 0;
+
+  }to {
+    opacity: 1;
+  }
 }
