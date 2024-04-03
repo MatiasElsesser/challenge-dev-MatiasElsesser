@@ -19,7 +19,6 @@ form {
   width: 80%;
 }
 
-/* cambiar por icono de busqueda */
 .search-btn {
   width: 20%;
   border-radius: 0 8px 8px 0;
@@ -46,4 +45,18 @@ input[type="text"]:hover {
 input[type="text"]:focus,
 input[type="text"]:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (max-width: 991px) {
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchbar-container {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  button[type="reset"]{
+    width: 100%;
+  }
 }
