@@ -4,11 +4,14 @@ import { useLazyQuery } from '@apollo/client'
 import { SEARCH_CHARACTER } from '../querys/querys'
 import './Search.css'
 import { SearchIcon } from '../icons/SearchIcon'
+import { Modal } from './Modal'
+import { Link } from 'react-router-dom'
 
-export const Search = ({ handleClick }) => {
+export const Search = () => {
   const [getCharacter, { data, error, loading }] = useLazyQuery(SEARCH_CHARACTER)
   const [results, setResults] = useState([])
   const [search, setSearch] = useState('')
+  const [selectedCharacter, setSelectedCharacter] = useState(null)
 
   const handleReset = () => {
     setResults([])
@@ -20,6 +23,10 @@ export const Search = ({ handleClick }) => {
     if (search.length >= 1) {
       getCharacter({ variables: { name: search } })
     }
+  }
+
+  const handleClick = (character) => {
+    setSelectedCharacter(character)
   }
 
   useEffect(() => {
@@ -55,6 +62,11 @@ export const Search = ({ handleClick }) => {
           type='reset'
         >Eliminar busqueda
         </button>
+
+        <Link to='/'>
+          Regresar
+        </Link>
+
       </form>
       {
         results.length > 0 &&
@@ -74,6 +86,13 @@ export const Search = ({ handleClick }) => {
           })
         }
       </section>
+      {
+        selectedCharacter &&
+          <Modal
+            closeModal={() => setSelectedCharacter(null)}
+            character={selectedCharacter}
+          />
+      }
     </>
   )
 }

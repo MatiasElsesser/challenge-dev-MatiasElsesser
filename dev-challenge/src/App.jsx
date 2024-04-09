@@ -4,10 +4,10 @@ import { Card } from './components/Card'
 import { Modal } from './components/Modal'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
-import { Search } from './components/Search'
 import { ScrollTopBtn } from './components/ScrollTopBtn'
 import { Filters } from './components/Filters'
 import { useFilters } from './hooks/useFilters'
+import { Link } from 'react-router-dom'
 
 function App () {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
@@ -92,11 +92,11 @@ function App () {
 
   return (
     <>
-      <Search
-        handleClick={handleClick}
-      />
-      <h2>Personajes</h2>
+      <h1>Personajes</h1>
 
+      <Link to='/search'>
+        Buscar
+      </Link>
       <Filters
         data={data}
         filters={filters}
