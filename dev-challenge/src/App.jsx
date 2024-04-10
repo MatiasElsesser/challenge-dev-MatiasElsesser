@@ -94,8 +94,8 @@ function App () {
     <>
       <h1>Personajes</h1>
 
-      <Link to='/search'>
-        Buscar
+      <Link to='/'>
+        Regresar
       </Link>
       <Filters
         data={data}
