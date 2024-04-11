@@ -5,7 +5,7 @@
   border-radius: 15px;
   transition: all .3s;
   animation: showCard 1s;
-
+  color: #fff;
 }
 
 .card-container h3 {
