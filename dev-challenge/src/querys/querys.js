@@ -41,3 +41,21 @@ gql`
     }
   }
   `
+export const CHARACTER_BY_ID =
+gql`
+query getCharacter($id: ID!) {
+  character(id: $id){
+    name
+    id
+    image
+    status
+    type
+    species
+    gender
+    origin {
+      name
+      dimension
+    }
+  }
+}
+`

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Card } from './components/Card'
-import { Modal } from './components/Modal'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_CHARACTERS } from './querys/querys'
 import { ScrollTopBtn } from './components/ScrollTopBtn'
@@ -10,7 +9,6 @@ import { useFilters } from './hooks/useFilters'
 import { Link } from 'react-router-dom'
 
 function App () {
-  const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [offset, setOffset] = useState(1)
   const [isFetching, setIsFetching] = useState(false)
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_CHARACTERS, {
@@ -80,10 +78,6 @@ function App () {
     loadNextPage()
   }, [isFetching, fetchMore, loading, data, characters])
 
-  const handleClick = (character) => {
-    setSelectedCharacter(character)
-  }
-
   if (error) {
     console.log(error)
     return <p>Ocurrio un error</p>
@@ -107,23 +101,17 @@ function App () {
         {
           filteredCharacters.map((e) => {
             return (
-              <Card
-                onClick={handleClick}
-                character={e}
-                key={e.id}
-              />
+              <Link key={e.id} to={`/characters/${e.id}`}>
+                <Card
+                  character={e}
+                  key={e.id}
+                />
+              </Link>
             )
           })
         }
       </main>
 
-      {
-        selectedCharacter &&
-          <Modal
-            closeModal={() => setSelectedCharacter(null)}
-            character={selectedCharacter}
-          />
-      }
       <ScrollTopBtn />
     </>
   )
