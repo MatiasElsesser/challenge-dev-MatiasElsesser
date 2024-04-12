@@ -21,14 +21,13 @@
 .home-links-container a{
   font-size: 3rem;
   padding: 0.6em 1.2em;
-  color: #fff;
-  outline: 1px solid #646cff;
-  transition: all .5s;
+  color: #646cff;
+  border: 2px solid #646cff;
+  transition: all .3s;
 }
 
 .home-links-container a:hover {
-  text-shadow: 10px 10px 5px #1a1a1a;
-  color: #646cff;
+  border: 2px solid #878cfa;
+  color: #878cfa;
   opacity: .8;
-  outline: 2px solid #878cfa;
 }
