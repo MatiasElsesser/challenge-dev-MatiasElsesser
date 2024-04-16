@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { CHARACTER_BY_ID } from '../querys/querys'
 import { useQuery } from '@apollo/client'
+import './Character.css'
 
 export const Character = () => {
   const { characterId } = useParams()
@@ -19,23 +20,46 @@ export const Character = () => {
 
   const { name, image, id, species, gender, status, origin } = data?.character
 
+  const nameArr = name.split('')
+
   return (
-    <div>
-      <Link to='#' onClick={() => window.history.back()}>Regresar</Link>
+    <div className='character-page'>
       <section>
-        <img src={image} />
-        <article>
-          <ul>
-            <li><b>Nombre: </b>{name}</li>
-            <li><b>Id: </b>{id}</li>
-            <li><b>Especie: </b>{species}</li>
-            <li><b>Gender: </b>{gender}</li>
-            <li><b>Status: </b>{status}</li>
-            <li><b>Origin: </b>{origin.name}</li>
-            <li><b>Dimension: </b>{origin.dimension}</li>
-          </ul>
+        <article className='character-header'>
+          <h1>
+            {
+              nameArr.map((e) => {
+                return (
+                  <span key={Crypto.randomUUID} className='character-span-name'>{e}</span>
+                )
+              })
+            }
+          </h1>
+          <img src={image} />
+        </article>
+        <article className='colums-container'>
+          <div className='column'>
+            <ul className='character-items'>
+              <li><b>Especie </b>{species}</li>
+              <li><b>Gender </b>{gender}</li>
+              <li><b>Status </b>{status}</li>
+            </ul>
+          </div>
+
+          <div className='column'>
+            <ul className='character-items'>
+              <li><b>Origin </b>{origin.name}</li>
+              <li><b>Id </b>{id}</li>
+              {
+              origin.dimension &&
+                <li><b>Dimension </b>{origin.dimension}</li>
+              }
+            </ul>
+          </div>
         </article>
       </section>
+      <Link to='#' onClick={() => window.history.back()}>Regresar</Link>
+
     </div>
   )
 }

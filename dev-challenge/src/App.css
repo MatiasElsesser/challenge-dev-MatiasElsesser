@@ -63,7 +63,7 @@ select::-ms-expand {
   width: 20%;
 }
 select:hover {
-  outline:1px solid #646cff ;
+  outline:1px solid var(--rick-color) ;
 }
 
 @media (max-width: 991px) {

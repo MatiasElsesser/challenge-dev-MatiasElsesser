@@ -1,0 +1,82 @@
+.character-page {
+  font-family: "Work Sans", sans-serif;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin: 0;
+}
+
+.character-page section {
+  margin-bottom: 5rem;
+}
+
+/* HEADER */
+.character-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.character-header h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+.character-span-name:hover {
+  font-size: 6rem;
+  color: var(--morty-color);
+}
+
+.character-span-name {
+  font-size: 5rem;
+  transition: all .3s;
+}
+
+.character-header img{
+  border: 3px solid var(--morty-color);
+  border-radius: 50%;
+}
+/* FINAL HEADER */
+
+/* CONTENT */
+.colums-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colum {
+  flex: 1;
+}
+
+.character-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0;
+}
+.character-items li {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.character-items b {
+  color: var(--rick-color);
+}
+/* FINAL CONTENT */
+
+.character-page a {
+  font-size: 2rem;
+}
+
+
+@media  (max-width: 425px){
+  .character-header {
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
+  .character-header h1 {
+    margin: 0;
+  }
+}

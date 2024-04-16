@@ -14,5 +14,5 @@
   align-items: center;
 }
 .scrollTopBtn:hover {
-  outline: 1px solid #646cff;;
+  outline: 1px solid var(--rick-color);;
 }

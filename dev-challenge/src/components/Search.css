@@ -40,7 +40,7 @@ input[type="text"] {
 }
 
 input[type="text"]:hover {
-  border-color: #646cff;
+  border-color: var(--rick-color);
 }
 
 input[type="text"]:focus,
