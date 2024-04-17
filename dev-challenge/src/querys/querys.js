@@ -69,10 +69,10 @@ query getEpisodes($page: Int) {
     }
     results {
       name
-      episode
       id
       air_date
       characters{
+        image
         name
       }
     }

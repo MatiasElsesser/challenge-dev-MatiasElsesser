@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+  border-radius: 8px;
+}
+
+thead {
+  height: 3rem;
+  font-size: 2rem;
+  color: var(--morty-color);
+}
+
+tbody {
+  font-size: 1.5rem;
+}
+
+tr {
+  transition: all .3s;
+}
+tr:nth-child(odd) {
+  background: #3333338e;
+}
+tr:nth-child(even) {
+  background: #66666682;
+}
+tr:hover {
+  background: transparent;
+  color: var(--rick-color);
+}
