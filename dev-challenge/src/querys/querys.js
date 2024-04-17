@@ -59,3 +59,22 @@ query getCharacter($id: ID!) {
   }
 }
 `
+
+export const GET_ALL_EPISODES =
+gql`
+query getEpisodes($page: Int) {
+  episodes(page:$page){
+    info{
+      next
+    }
+    results {
+      name
+      episode
+      id
+      air_date
+      characters{
+        name
+      }
+    }
+  }
+}`

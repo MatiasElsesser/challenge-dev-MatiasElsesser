@@ -6,7 +6,8 @@ import { GET_ALL_CHARACTERS } from './querys/querys'
 import { ScrollTopBtn } from './components/ScrollTopBtn'
 import { Filters } from './components/Filters'
 import { useFilters } from './hooks/useFilters'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Loader } from './components/Loader'
 
 function App () {
   const [offset, setOffset] = useState(1)
@@ -21,6 +22,8 @@ function App () {
     setFilters,
     characters
   } = useFilters()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (data && data.characters.results) {
@@ -78,19 +81,23 @@ function App () {
     loadNextPage()
   }, [isFetching, fetchMore, loading, data, characters])
 
+  const goBack = () => {
+    navigate(-1)
+  }
+
   if (error) {
     console.log(error)
     return <p>Ocurrio un error</p>
   }
-  if (loading) return <p>Cargando resultados...</p>
+  if (loading) return <Loader />
 
   return (
     <>
       <h1>Personajes</h1>
 
-      <Link to='/'>
+      <button onClick={goBack}>
         Regresar
-      </Link>
+      </button>
       <Filters
         data={data}
         filters={filters}

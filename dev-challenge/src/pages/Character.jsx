@@ -1,6 +1,7 @@
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { CHARACTER_BY_ID } from '../querys/querys'
 import { useQuery } from '@apollo/client'
+import { Loader } from '../components/Loader'
 import './Character.css'
 
 export const Character = () => {
@@ -9,12 +10,18 @@ export const Character = () => {
     variables: { id: characterId }
   })
 
+  const navigate = useNavigate()
+
+  const goBack = () => {
+    navigate(-1)
+  }
+
   if (error) {
     console.log(error.name, error.message)
     return <p>Ocurrio un error</p>
   }
 
-  if (loading) return <p>Cargando...</p>
+  if (loading) return <Loader />
 
   if (!data || !data.character) return <p>No se encontraron datos</p>
 
@@ -58,7 +65,7 @@ export const Character = () => {
           </div>
         </article>
       </section>
-      <Link to='#' onClick={() => window.history.back()}>Regresar</Link>
+      <button onClick={goBack}>Regresar</button>
 
     </div>
   )

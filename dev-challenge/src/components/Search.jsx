@@ -4,19 +4,19 @@ import { useLazyQuery } from '@apollo/client'
 import { SEARCH_CHARACTER } from '../querys/querys'
 import './Search.css'
 import { SearchIcon } from '../icons/SearchIcon'
-import { Modal } from './Modal'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Loader } from './Loader'
 
 export const Search = () => {
   const [getCharacter, { data, error, loading }] = useLazyQuery(SEARCH_CHARACTER)
   const [results, setResults] = useState([])
   const [search, setSearch] = useState('')
-  const [selectedCharacter, setSelectedCharacter] = useState(null)
 
   const handleReset = () => {
     setResults([])
     setSearch('')
   }
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -25,8 +25,8 @@ export const Search = () => {
     }
   }
 
-  const handleClick = (character) => {
-    setSelectedCharacter(character)
+  const goBack = () => {
+    navigate(-1)
   }
 
   useEffect(() => {
@@ -35,10 +35,16 @@ export const Search = () => {
     }
   }, [data])
 
+  if (loading) return <Loader />
+
   if (error) return <p>Ocurrio un error en la busqueda</p>
   return (
     <>
-      <h2>Busca tu personaje</h2>
+      <h1>Busca tu personaje</h1>
+
+      <button onClick={goBack}>
+        Regresar
+      </button>
       <form
         onSubmit={handleSubmit}
       >
@@ -63,10 +69,6 @@ export const Search = () => {
         >Eliminar busqueda
         </button>
 
-        <Link to='/'>
-          Regresar
-        </Link>
-
       </form>
       {
         results.length > 0 &&
@@ -75,24 +77,18 @@ export const Search = () => {
       <section className='search-results'>
         {loading && <p>Cargando...</p>}
         {
-          results.map(item => {
+          results.map(e => {
             return (
-              <Card
-                onClick={handleClick}
-                key={item.id}
-                character={item}
-              />
+              <Link key={e.id} to={`/characters/${e.id}`}>
+                <Card
+                  character={e}
+                  key={e.id}
+                />
+              </Link>
             )
           })
         }
       </section>
-      {
-        selectedCharacter &&
-          <Modal
-            closeModal={() => setSelectedCharacter(null)}
-            character={selectedCharacter}
-          />
-      }
     </>
   )
 }
