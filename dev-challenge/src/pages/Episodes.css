@@ -26,3 +26,60 @@ tr:hover {
   background: transparent;
   color: var(--rick-color);
 }
+
+.profile-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  place-items: center;
+  gap: 25px;
+}
+
+
+.profile-container img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.profile:hover .profile-info {
+  transform: scale(1.1);
+}
+
+.profile p {
+  margin-left: 25px;
+}
+.profile-info {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  transition: all .5s;
+  cursor: pointer;
+}
+
+.profile-row {
+  animation: showDropdown .5s ease forwards ;
+}
+
+
+@keyframes showDropdown {
+  from {
+    transform: scaleY(0);
+    transform-origin: top; 
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

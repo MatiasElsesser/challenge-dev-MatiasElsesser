@@ -17,7 +17,9 @@ export const Episodes = () => {
 
   useEffect(() => {
     if (data && data.episodes) {
-      const newEpisodes = data.episodes.results
+      const newEpisodes = data.episodes.results.filter(
+        episode => !episodes.some(existingEpisode => existingEpisode.id === episode.id)
+      )
       setEpisodes(prev => [...prev, ...newEpisodes])
     }
   }, [data])
@@ -50,6 +52,9 @@ export const Episodes = () => {
   const goBack = () => {
     navigate(-1)
   }
+  const handleNavigation = (characterId) => {
+    navigate(`/characters/${characterId}`)
+  }
 
   if (error) return <p>Ocurrió un error, pero no te preocupes. No es tu culpa</p>
   if (loading) return <Loader />
@@ -64,7 +69,7 @@ export const Episodes = () => {
             <th>Nro</th>
             <th>Nombre</th>
             <th>Fecha de estreno</th>
-            <th>+</th>
+            <th>Personajes</th>
           </tr>
         </thead>
         <tbody>
@@ -79,9 +84,14 @@ export const Episodes = () => {
                     <th><button onClick={() => handleSelectEpisode(e.id)}>+</button></th>
                   </tr>
                   {selectedEpisode === e.id && (
-                    <tr>
-                      <td colSpan={4}>
-                        <Profile characters={e.characters} />
+                    <tr className='profile-row'>
+                      <td
+                        colSpan={4}
+                      >
+                        <Profile
+                          characters={e.characters}
+                          navigation={handleNavigation}
+                        />
                       </td>
                     </tr>
                   )}
@@ -91,16 +101,21 @@ export const Episodes = () => {
           }
         </tbody>
       </table>
-      <button
-        disabled={!data.episodes.info.next}
-        onClick={handleClick}
-      >
-        {
-        loading
-          ? 'Cargando'
-          : 'Mas episodios'
+      {
+        data.episodes.info.next &&
+          (
+            <button
+              onClick={handleClick}
+            >
+              {
+                loading
+                  ? 'Cargando'
+                  : 'Mas episodios'
+              }
+            </button>
+          )
       }
-      </button>
+
       <ScrollTopBtn />
     </>
 

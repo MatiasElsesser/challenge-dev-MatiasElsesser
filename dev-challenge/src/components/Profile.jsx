@@ -1,4 +1,4 @@
-export const Profile = ({ characters }) => {
+export const Profile = ({ characters, navigation }) => {
   return (
     <section
       className='profile-container'
@@ -8,9 +8,12 @@ export const Profile = ({ characters }) => {
           <article
             className='profile'
             key={e.name}
+            onClick={() => navigation(e.id)}
           >
-            <img src={e.image} />
-            <p>{e.name}</p>
+            <div className='profile-info'>
+              <img src={e.image} />
+              <p>{e.name}</p>
+            </div>
           </article>
         )
       })}

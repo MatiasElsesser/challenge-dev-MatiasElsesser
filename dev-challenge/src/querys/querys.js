@@ -74,6 +74,7 @@ query getEpisodes($page: Int) {
       characters{
         image
         name
+        id
       }
     }
   }
