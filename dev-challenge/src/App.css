@@ -82,3 +82,6 @@ select:hover {
     justify-content: space-between;
   }
 }
+a {
+  padding: 0;
+}

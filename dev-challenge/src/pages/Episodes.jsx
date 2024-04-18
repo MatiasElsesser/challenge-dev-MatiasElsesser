@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { ScrollTopBtn } from '../components/ScrollTopBtn'
 import './Episodes.css'
 import { Profile } from '../components/Profile'
+import { DownIcon } from '../icons/DownIcon'
+import { UpIcon } from '../icons/UpIcon'
 
 export const Episodes = () => {
   const [offset, setOffset] = useState(1)
@@ -81,7 +83,15 @@ export const Episodes = () => {
                     <th>{e.id}</th>
                     <th>{e.name}</th>
                     <th>{e.air_date}</th>
-                    <th><button onClick={() => handleSelectEpisode(e.id)}>+</button></th>
+                    <th
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleSelectEpisode(e.id)}
+                    >
+                      {selectedEpisode
+                        ? <UpIcon />
+                        : <DownIcon />}
+                    </th>
+
                   </tr>
                   {selectedEpisode === e.id && (
                     <tr className='profile-row'>

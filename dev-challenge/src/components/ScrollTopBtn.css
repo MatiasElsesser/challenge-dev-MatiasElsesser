@@ -1,8 +1,7 @@
 .scrollTopBtn {
   position: fixed;
   bottom: 20px;
-  right: 50%;
-  transform:translateX(50%);
+  right: 20px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -14,7 +13,5 @@
   justify-content: center;
   align-items: center;
   opacity: .8;
-}
-.scrollTopBtn:hover {
-  outline: 2px solid var(--rick-color);;
+  outline: 2px solid var(--rick-color);
 }
