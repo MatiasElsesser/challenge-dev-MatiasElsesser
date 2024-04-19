@@ -8,10 +8,11 @@ import './Episodes.css'
 import { Profile } from '../components/Profile'
 import { DownIcon } from '../icons/DownIcon'
 import { UpIcon } from '../icons/UpIcon'
+import { useEpisodesContext } from '../context/PagesContext'
 
 export const Episodes = () => {
   const [offset, setOffset] = useState(1)
-  const [episodes, setEpisodes] = useState([])
+  const { totalEpisodes, updateTotalEpisodes, handleClick } = useEpisodesContext()
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_EPISODES, { variables: { page: offset } })
   const [selectedEpisode, setSelectedEpisode] = useState(null)
 
@@ -20,30 +21,11 @@ export const Episodes = () => {
   useEffect(() => {
     if (data && data.episodes) {
       const newEpisodes = data.episodes.results.filter(
-        episode => !episodes.some(existingEpisode => existingEpisode.id === episode.id)
+        episode => !totalEpisodes.some(existingEpisode => existingEpisode.id === episode.id)
       )
-      setEpisodes(prev => [...prev, ...newEpisodes])
+      updateTotalEpisodes(prev => [...prev, ...newEpisodes])
     }
   }, [data])
-
-  const handleClick = () => {
-    const loadNextPage = async () => {
-      try {
-        const moreEpisodes = await fetchMore({
-          variables: { page: data.episodes.info.next }
-        })
-
-        const ep = await moreEpisodes.data.episodes.results
-
-        setEpisodes(prev => [...prev, ...ep])
-
-        setOffset(data.episodes.info.next)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    loadNextPage()
-  }
 
   const handleSelectEpisode = (episodeId) => {
     setSelectedEpisode((prevSelectedEpisode) =>
@@ -60,7 +42,6 @@ export const Episodes = () => {
 
   if (error) return <p>Ocurrió un error, pero no te preocupes. No es tu culpa</p>
   if (loading) return <Loader />
-  console.log(episodes)
   return (
     <>
       <h1>Episodios</h1>
@@ -76,7 +57,7 @@ export const Episodes = () => {
         </thead>
         <tbody>
           {
-            episodes.map((e) => {
+            totalEpisodes.map((e) => {
               return (
                 <React.Fragment key={e.id}>
                   <tr>
@@ -112,10 +93,10 @@ export const Episodes = () => {
         </tbody>
       </table>
       {
-        data.episodes.info.next &&
+        data.episodes.info.count > totalEpisodes.length &&
           (
             <button
-              onClick={handleClick}
+              onClick={() => handleClick(data, fetchMore, setOffset)}
             >
               {
                 loading

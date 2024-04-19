@@ -1,9 +1,40 @@
-import { createContext } from 'react'
+import { createContext, useState, useContext } from 'react'
 
-export const PagesContext = createContext()
+const EpisodesContext = createContext()
 
-export const ContextProvider = ({ children }) => {
-  <PagesContext.Provider>
-    {children}
-  </PagesContext.Provider>
+export const useEpisodesContext = () => useContext(EpisodesContext)
+
+export const EpisodesProvider = ({ children }) => {
+  const [totalEpisodes, setTotalEpisodes] = useState([])
+
+  const handleClick = (data, fetchMore, setOffset) => {
+    const loadNextPage = async () => {
+      try {
+        const moreEpisodes = await fetchMore({
+          variables: { page: data.episodes.info.next }
+        })
+
+        const ep = await moreEpisodes.data.episodes.results
+
+        updateTotalEpisodes(prev => [...prev, ...ep])
+
+        setOffset(data.episodes.info.next)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loadNextPage()
+  }
+
+  const updateTotalEpisodes = (newTotal) => {
+    setTotalEpisodes(newTotal)
+  }
+
+  return (
+    <EpisodesContext.Provider
+      value={{ totalEpisodes, updateTotalEpisodes, handleClick }}
+    >
+      {children}
+    </EpisodesContext.Provider>
+  )
 }

@@ -66,6 +66,7 @@ query getEpisodes($page: Int) {
   episodes(page:$page){
     info{
       next
+      count
     }
     results {
       name
