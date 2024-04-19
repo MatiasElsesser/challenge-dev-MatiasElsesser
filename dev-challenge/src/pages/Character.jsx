@@ -37,7 +37,7 @@ export const Character = () => {
             {
               nameArr.map((e) => {
                 return (
-                  <span key={Crypto.randomUUID} className='character-span-name'>{e}</span>
+                  <span key={e} className='character-span-name'>{e}</span>
                 )
               })
             }
