@@ -51,7 +51,7 @@ export function AllCharacters () {
         Regresar
       </button>
       <Filters
-        data={data}
+        data={characters}
         filters={filters}
         setFilters={setFilters}
       />

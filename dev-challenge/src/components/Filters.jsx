@@ -1,7 +1,7 @@
 export const Filters = ({ data, setFilters, filters }) => {
   // TODO: fix filters options
   const extractOptions = (key) => {
-    const options = new Set(data.characters.results.map((character) => character[key]))
+    const options = new Set(data?.map((character) => character[key]))
     return [...options]
   }
 
