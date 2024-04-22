@@ -11,8 +11,13 @@ import { UpIcon } from '../icons/UpIcon'
 import { useEpisodesContext } from '../context/PagesContext'
 
 export const Episodes = () => {
-  const [offset, setOffset] = useState(1)
-  const { totalEpisodes, updateTotalEpisodes, handleClick } = useEpisodesContext()
+  const {
+    totalEpisodes,
+    updateTotalEpisodes,
+    handleClick,
+    offset,
+    setOffset
+  } = useEpisodesContext()
   const { data, error, loading, fetchMore } = useQuery(GET_ALL_EPISODES, { variables: { page: offset } })
   const [selectedEpisode, setSelectedEpisode] = useState(null)
 
@@ -45,7 +50,11 @@ export const Episodes = () => {
   return (
     <>
       <h1>Episodios</h1>
-      <button onClick={goBack}>Regresar</button>
+      <button
+        className='episodes-back-btn'
+        onClick={goBack}
+      >Regresar
+      </button>
       <table>
         <thead>
           <tr>

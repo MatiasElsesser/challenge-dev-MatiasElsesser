@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useFilters = () => {
-  const [characters, setCharacters] = useState([])
+export const useFilters = (characters) => {
   const [filteredCharacters, setFilteredCharacters] = useState([])
   const [filters, setFilters] = useState({ status: '', species: '', gender: '' })
 
@@ -13,5 +12,5 @@ export const useFilters = () => {
     setFilteredCharacters(filteredCharacters)
   }, [characters, filters])
 
-  return { filteredCharacters, setFilters, setCharacters, filters, characters }
+  return { filteredCharacters, setFilters, filters }
 }

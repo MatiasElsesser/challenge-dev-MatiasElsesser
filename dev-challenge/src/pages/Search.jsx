@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Card } from './Card'
+import { Card } from '../components/Card'
 import { useLazyQuery } from '@apollo/client'
 import { SEARCH_CHARACTER } from '../querys/querys'
 import './Search.css'
 import { SearchIcon } from '../icons/SearchIcon'
 import { Link, useNavigate } from 'react-router-dom'
-import { Loader } from './Loader'
+import { Loader } from '../components/Loader'
 
 export const Search = () => {
   const [getCharacter, { data, error, loading }] = useLazyQuery(SEARCH_CHARACTER)

@@ -1,14 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { Home } from './pages/Home'
-import App from './App'
-import { Search } from './components/Search'
+import { AllCharacters } from './pages/AllCharacters'
+import { Search } from './pages/Search'
 import { Character } from './pages/Character'
 import { Episodes } from './pages/Episodes'
 
 export const router = createBrowserRouter([
   {
     path: '/characters',
-    element: <App />
+    element: <AllCharacters />
   },
   {
     path: '/search',

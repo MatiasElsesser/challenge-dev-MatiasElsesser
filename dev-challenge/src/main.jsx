@@ -12,11 +12,12 @@ const client = new ApolloClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <CharactersProvider>
-    <EpisodesProvider>
-      <ApolloProvider client={client}>
+  <ApolloProvider client={client}>
+    <CharactersProvider>
+      <EpisodesProvider>
         <RouterProvider router={router} />
-      </ApolloProvider>
-    </EpisodesProvider>
-  </CharactersProvider>
+      </EpisodesProvider>
+    </CharactersProvider>
+  </ApolloProvider>
+
 )

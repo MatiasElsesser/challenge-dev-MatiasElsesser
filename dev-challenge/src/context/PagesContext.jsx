@@ -6,6 +6,7 @@ export const useEpisodesContext = () => useContext(EpisodesContext)
 
 export const EpisodesProvider = ({ children }) => {
   const [totalEpisodes, setTotalEpisodes] = useState([])
+  const [offset, setOffset] = useState(1)
 
   const handleClick = (data, fetchMore, setOffset) => {
     const loadNextPage = async () => {
@@ -32,7 +33,7 @@ export const EpisodesProvider = ({ children }) => {
 
   return (
     <EpisodesContext.Provider
-      value={{ totalEpisodes, updateTotalEpisodes, handleClick }}
+      value={{ totalEpisodes, updateTotalEpisodes, handleClick, offset, setOffset }}
     >
       {children}
     </EpisodesContext.Provider>
